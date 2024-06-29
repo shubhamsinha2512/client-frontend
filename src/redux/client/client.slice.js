@@ -19,19 +19,18 @@ const clientSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchClients.pending, (state, action) => {});
-    builder.addCase(fetchClients.rejected, (state) => {});
+    builder.addCase(fetchClients.rejected, (state, action) => {});
     builder.addCase(fetchClients.fulfilled, (state, action) => {
       state.clients = action.payload;
     });
 
     builder.addCase(searchClients.pending, (state, action) => {});
-    builder.addCase(searchClients.rejected, (state) => {});
+    builder.addCase(searchClients.rejected, (state, action) => {});
     builder.addCase(searchClients.fulfilled, (state, action) => {
       state.searchResults = action.payload;
     });
 
-    builder.addCase(fetchClientsById.pending, (state, action) => {});
-    builder.addCase(fetchClientsById.rejected, (state) => {});
+    builder.addCase(fetchClientsById.rejected, (state, action) => {});
     builder.addCase(fetchClientsById.fulfilled, (state, action) => {
       state.activeClient = action.payload;
     });
@@ -46,7 +45,7 @@ export const searchClients = createAsyncThunk("searchClients", (query) =>
   ClientService.fetchClientsWithQueryAPI(query)
 );
 
-export const fetchClientsById = createAsyncThunk("searchClients", (id) =>
+export const fetchClientsById = createAsyncThunk("fetchClientsById", (id) =>
   ClientService.fetchClientsByIdAPI(id)
 );
 
